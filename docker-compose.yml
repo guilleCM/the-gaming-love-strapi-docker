@@ -15,8 +15,12 @@ services:
       - DATABASE_SSL=false
       - DATABASE_AUTHENTICATION_DATABASE=strapi
       - HOST=localhost
-    ports:
-      - 1337:1337
+      - VIRTUAL_PORT=1337
+      - VIRTUAL_HOST=api.thegaminglove.com
+      - LETSENCRYPT_HOST=api.thegaminglove.com
+      - LETSENCTRYPT_EMAIL=guiem.mca@gmail.com
+    expose:
+      - 80
     volumes:
       - ./strapi-app:/usr/src/api/strapi-app
       #- /usr/src/api/strapi-app/node_modules
@@ -33,3 +37,8 @@ services:
     volumes:
       - ./db:/data/db
     restart: always
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
