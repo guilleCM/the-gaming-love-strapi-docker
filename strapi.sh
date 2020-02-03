@@ -26,7 +26,7 @@ elif [ ! -d "$APP_NAME/node_modules" ]
 then
     npm install --prefix ./$APP_NAME
 fi
-
+npm install slugify --save
 cd $APP_NAME
 strapi start &
 

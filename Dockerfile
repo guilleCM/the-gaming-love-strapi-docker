@@ -14,6 +14,7 @@ WORKDIR /usr/src/api
 RUN echo "unsafe-perm = true" >> ~/.npmrc
 
 RUN npm install -g strapi@alpha
+RUN npm install -g slugify
 
 COPY strapi.sh ./
 RUN chmod +x ./strapi.sh
@@ -23,5 +24,7 @@ EXPOSE 1337
 COPY healthcheck.js ./
 HEALTHCHECK --interval=15s --timeout=5s --start-period=30s \
       CMD node /usr/src/api/healthcheck.js
+
+ENV NODE_ENV production
 
 CMD ["./strapi.sh"]
